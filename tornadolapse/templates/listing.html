@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Index of {{ path }}</title>
+    </head>
+    <body>
+        <h1>Index of {{ path }}</h1>
+        <table>
+            <tr>
+                <th valign="top"><img src="/static/img/blank.gif" alt="[ICO]"></th>
+                <th/>
+                <th>Name</th>
+                <th>Last modified</th>
+                <th>Size</th>
+            </tr>
+            <tr>
+                <th colspan="5"><hr></th>
+            </tr>
+            {% if listing['parent'] is not None %}
+            <tr>
+                <td valign="top"><img src="/static/img/back.gif" alt="[PARENTDIR]"></td>
+                <td/>
+                <td><a href="{{ listing['parent'] }}">Parent directory</a></td>
+                <td>&nbsp;</td>
+                <td align="right"> - </td>
+            </tr>
+            {% end %}
+            {% for dir in listing['dirs'] %}
+            <tr>
+                <td valign="top"><img src="/static/img/folder.gif" alt="[DIR]"></td>
+                <td/>
+                <td><a href="{{ dir['url'] }}">{{ dir['name'] }}</a></td>
+                <td>{{ dir['modified_time'] }}</td>
+                <td align="right"> - </td>
+            </tr>
+            {% end %}
+            {% for file in listing['files'] %}
+            <tr>
+                <td valign="top"><img src="/static/img/generic.gif" alt="[   ]"></td>
+                <td/>
+                <td><a href="{{ file['url'] }}">{{ file['name'] }}</a></td>
+                <td>{{ file['modified_time'] }}</td>
+                <td align="right">{{ file['size'] }}</td>
+            </tr>
+            {% end %}
+        </table>
+    </body>
+</html>
